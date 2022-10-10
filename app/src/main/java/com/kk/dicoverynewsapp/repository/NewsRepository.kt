@@ -21,6 +21,7 @@ class NewsRepository(private val userService: NewsService) //if need database ad
 
     suspend fun getNews(searchQuery: String,from :String,sortBy :String,apiKey :String) {
         //call to web api user interface
+       // newsLiveData.postValue(null)
         val result = userService.getNews(searchQuery,from,sortBy,apiKey)
         //null safety used
         if (result?.body() != null) {
