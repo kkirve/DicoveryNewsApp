@@ -1,100 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
-        tools:context=".ui.MainActivity">
-    <TextView
-        android:id="@+id/labelName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name: "
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:padding="15dp"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/textName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kiran Kirve"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:padding="15dp"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-<!--    <data>
-
-        <import type=".utils.BindingUtils" />
-
-        <variable
-            name="news"
-            type=".models.Article" />
-    </data>-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
-        android:paddingStart="@dimen/rv_horizontal_offset"
-        android:paddingTop="@dimen/rv_vertical_offset"
-        android:paddingEnd="@dimen/rv_horizontal_offset"
-        android:paddingBottom="@dimen/rv_vertical_offset"
-        tools:context=".ui.MainActivity">
+        android:padding="5dp"
+       >
 
         <TextView
-            android:id="@+id/tv_news_title"
+
+            android:id="@+id/textviewNewsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:minLines="3"
-            android:text="@{news.title}"
-            android:textAppearance="@style/AppTheme.Headline.Title"
-            android:textColor="@color/colorTextSecondary"
+            android:text=""
+            android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@id/iv_options"
-            app:layout_constraintStart_toEndOf="@id/iv_news_image"
-            app:layout_constraintTop_toTopOf="@id/iv_news_image"
-            tools:text="@string/sample_title_long" />
+            app:layout_constraintStart_toEndOf="@id/ivNewsImage"
+            app:layout_constraintTop_toTopOf="@id/ivNewsImage"
+            tools:text="title"
+            />
 
         <ImageView
-            android:id="@+id/iv_news_image"
+            android:id="@+id/ivNewsImage"
             android:layout_width="82dp"
             android:layout_height="82dp"
-            android:contentDescription="@string/image_desc"
-            android:src="@color/cardBackground"
+            android:contentDescription="Image_desc"
+            android:src="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:articleUrl="@{news.url}"
-            bind:url="@{news.urlToImage}" />
-
-        <TextView
-            android:id="@+id/tv_news_source"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{BindingUtils.getSourceAndTime(news.source.name, news.publishedAt)}"
-            android:textColor="@color/colorPrimaryLight"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@id/tv_news_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
-            tools:text="@string/sample_source" />
+          />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

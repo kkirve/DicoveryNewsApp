@@ -33,4 +33,9 @@ class MainViewModel(private val userRepository: NewsRepository,
     val news: LiveData<NewsList>
         get() = userRepository.news
 
+    fun clearNews()
+    {
+
+    }
+
 }
