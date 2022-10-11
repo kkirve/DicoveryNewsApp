@@ -13,10 +13,9 @@ class MainViewModel(private val userRepository: NewsRepository,
                     from:String,
                     sortBy :String,
                     apiKey:String) : ViewModel() {
-    //if View Model load then Repository also get load
 
     init {
-        //getnews is suspend function that's why launch coroutine
+        //get news is suspend function that's why launch coroutine
         //IO operation //news
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.getNews(searchQuery,from,sortBy,apiKey)

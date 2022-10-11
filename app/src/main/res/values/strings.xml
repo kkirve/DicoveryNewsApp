@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">DiscoveryNewsApp</string>
+
+    <string name="queryCanada">Canada</string>
+    <string name="queryUS">United States</string>
+    <string name="queryIndia">India</string>
+    <string name="queryFrom">2022-10-10</string>
+    <string name="querySortBy">popularity</string>
+    <string name="queryAPIKey">22bb22af9cdd4fc5ab21d3eefc387b09</string>
+
+    <string name="selectCanada">Canada Selected</string>
+    <string name="selectUS">United States Selected</string>
+    <string name="selectIndia">India Selected</string>
+    <string name="pleaseChooseCountry">Please Choose Any One Country</string>
+
+    <string name="paramUrl">url</string>
+    <string name="paramContent">content</string>
+    <string name="paramTitle">title</string>
+    <string name="paramAuthor">author</string>
+    <string name="paramUrlToImage">urltoimage</string>
+    <string name="paramDescription">description</string>
+    <string name="paramPublishedat">publishedat</string>
+
+
 </resources>

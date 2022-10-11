@@ -39,13 +39,13 @@ class NewsRecyclerAdpater(private val context: Context, private val news: List<A
         holder.ivNewsImage.setOnClickListener()
         {
             val detail = Intent(context, DetailActivity::class.java)
-            detail.putExtra("url", new.url)
-            detail.putExtra("content", new.content)
-            detail.putExtra("title", new.title)
-            detail.putExtra("author", new.author)
-            detail.putExtra("urltoimage", new.urlToImage)
-            detail.putExtra("description", new.description)
-            detail.putExtra("publishedat", new.publishedAt)
+            detail.putExtra(context.getString(R.string.paramUrl), new.url)
+            detail.putExtra(context.getString(R.string.paramContent), new.content)
+            detail.putExtra(context.getString(R.string.paramTitle), new.title)
+            detail.putExtra(context.getString(R.string.paramAuthor), new.author)
+            detail.putExtra(context.getString(R.string.paramUrlToImage), new.urlToImage)
+            detail.putExtra(context.getString(R.string.paramDescription), new.description)
+            detail.putExtra(context.getString(R.string.paramPublishedat), new.publishedAt)
             // start your next activity
             startActivity(context,detail,detail.getBundleExtra("url"))
 

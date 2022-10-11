@@ -26,29 +26,11 @@ object RetrofitHelper {
 
     // Create Logger
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
     // Create a Custom Interceptor to apply Headers application wide
-    val headerInterceptor = object : Interceptor {
-
-        override fun intercept(chain: Interceptor.Chain): Response {
-
-            var request = chain.request()
-
-            request = request.newBuilder()
-                .addHeader("x-device-type", Build.DEVICE)
-                .addHeader("Accept-Language", Locale.getDefault().language)
-                .addHeader("Content-Type","application/json")
-                .build()
-
-            val response = chain.proceed(request)
-            return response
-        }
-    }
 
     private val okHttp = OkHttpClient.Builder()
         .callTimeout(6000, TimeUnit.SECONDS)
         .addInterceptor(logger)
-
 
     //return retrofit instance
     fun getInstance(): Retrofit {

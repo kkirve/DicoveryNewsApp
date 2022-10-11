@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+        //set up clickable for buttons
         setupButtonCanadaClick()
         setupButtonUSClick()
         setupButtonIndiaClick()
@@ -36,27 +37,18 @@ class MainActivity : AppCompatActivity()  {
         val newsService = RetrofitHelper.getInstance().create(NewsService::class.java)
         val repository = NewsRepository(newsService)
         val recyclerView = binding.listView
-/*        val adapter = NewsAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter*/
 
-
-        mainViewModel =
-            ViewModelProvider(this, MainViewModelFactory(repository,"Canada","2022-10-10","popularity","22bb22af9cdd4fc5ab21d3eefc387b09")).get(MainViewModel::class.java)
+        //use param for calling viewmodel with factory to pass param
+        mainViewModel = ViewModelProvider(this, MainViewModelFactory(repository,getString(R.string.queryCanada),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey))).get(MainViewModel::class.java)
 
 
         mainViewModel.news.observe(this, Observer {
-
-            Log.d("Kiran",  "Kiran " + it.articles.toString())
-            //add to adapter
+            //observe list here for new changes
+            //add to adapter and set data to recyclerView
             val adapter = NewsRecyclerAdpater(this,it.articles)
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = adapter
-
-           // adapter.submitList(it.articles)
-           // mainViewModel.callWebService("United States","2022-10-10","popularity","22bb22af9cdd4fc5ab21d3eefc387b09");
 
         })
 
@@ -85,16 +77,16 @@ class MainActivity : AppCompatActivity()  {
 
     fun buttonCanadaClick()
     {
-        binding.textViewSelectedCountry.text="Canada Selected"
+        binding.textViewSelectedCountry.text=getString(R.string.selectCanada)
     }
     fun buttonUSClick()
     {
-        binding.textViewSelectedCountry.text="US Selected"
-        mainViewModel.callWebService("United States","2022-10-10","popularity","22bb22af9cdd4fc5ab21d3eefc387b09");
+        binding.textViewSelectedCountry.text=getString(R.string.selectUS)
+        mainViewModel.callWebService(getString(R.string.queryUS),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
     }
     fun buttonIndiaClick()
     {
-        binding.textViewSelectedCountry.text="India Selected"
-        mainViewModel.callWebService("India","2022-10-10","popularity","22bb22af9cdd4fc5ab21d3eefc387b09");
+        binding.textViewSelectedCountry.text=getString(R.string.selectIndia)
+        mainViewModel.callWebService(getString(R.string.queryIndia),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
     }
 }

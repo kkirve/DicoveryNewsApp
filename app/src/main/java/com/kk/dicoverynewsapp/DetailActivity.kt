@@ -10,28 +10,24 @@ import com.kk.dicoverynewsapp.databinding.ActivityMainBinding
 class DetailActivity: AppCompatActivity()  {
     private lateinit var binding: ActivityDetailBinding
     val TAG = "DetailedActivity"
-    val PARAM_ARTICLE = "param-article"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= DataBindingUtil.setContentView(this,R.layout.activity_detail)
 
-
-        setupArticleAndListner()
-
-
+        setupArticleAndListener()
 
     }
 
-    private fun setupArticleAndListner() {
-        val url:String=intent.getStringExtra("url").toString()
+    private fun setupArticleAndListener() {
+        val url:String=intent.getStringExtra(getString(R.string.paramUrl)).toString()
 
-        val content:String=intent.getStringExtra("content").toString()
-        val title:String=intent.getStringExtra("title").toString()
-        val author:String=intent.getStringExtra("author").toString()
-        val urltoimage:String=intent.getStringExtra("urltoimage").toString()
-        val description:String=intent.getStringExtra("description").toString()
-        val publishedat:String=intent.getStringExtra("publishedat").toString()
+        val content:String=intent.getStringExtra(getString(R.string.paramContent)).toString()
+        val title:String=intent.getStringExtra(getString(R.string.paramTitle)).toString()
+        val author:String=intent.getStringExtra(getString(R.string.paramAuthor)).toString()
+        val urltoimage:String=intent.getStringExtra(getString(R.string.paramUrlToImage)).toString()
+        val description:String=intent.getStringExtra(getString(R.string.paramDescription)).toString()
+        val publishedat:String=intent.getStringExtra(getString(R.string.paramPublishedat)).toString()
 
         binding.tvNewsContent.text=content
         binding.tvNewsTitle.text=title
