@@ -15,15 +15,13 @@ class MainViewModel(private val userRepository: NewsRepository,
                     apiKey:String) : ViewModel() {
 
     init {
-        //get news is suspend function that's why launch coroutine
-        //IO operation //news
-        viewModelScope.launch(Dispatchers.IO) {
-            userRepository.getNews(searchQuery,from,sortBy,apiKey)
-        }
+        callWebService(searchQuery,from,sortBy,apiKey)
     }
 
     fun callWebService(searchQuery :String, from:String, sortBy :String,apiKey:String)
     {
+        //get news is suspend function that's why launch coroutine
+        //IO operation //news
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.getNews(searchQuery,from,sortBy,apiKey)
         }

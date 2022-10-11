@@ -1,15 +1,16 @@
 package com.kk.dicoverynewsapp
 
-import android.content.Intent
-import android.net.Uri
+import android.R.id
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.kk.dicoverynewsapp.adapter.NewsRecyclerAdpater
 import com.kk.dicoverynewsapp.api.NewsService
 import com.kk.dicoverynewsapp.api.RetrofitHelper
@@ -18,15 +19,17 @@ import com.kk.dicoverynewsapp.repository.NewsRepository
 import com.kk.dicoverynewsapp.viewmodels.MainViewModel
 import com.kk.dicoverynewsapp.viewmodels.MainViewModelFactory
 
+
 class MainActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityMainBinding
     lateinit var mainViewModel: MainViewModel
     val TAG = "MainActivity"
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main)
-
+        analytics = Firebase.analytics
         //set up clickable for buttons
         setupButtonCanadaClick()
         setupButtonUSClick()
@@ -77,16 +80,35 @@ class MainActivity : AppCompatActivity()  {
 
     fun buttonCanadaClick()
     {
+        callLoadNewsAnalytics(getString(R.string.selectCanada))
         binding.textViewSelectedCountry.text=getString(R.string.selectCanada)
     }
     fun buttonUSClick()
     {
+
+        callLoadNewsAnalytics(getString(R.string.selectUS))
         binding.textViewSelectedCountry.text=getString(R.string.selectUS)
         mainViewModel.callWebService(getString(R.string.queryUS),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
     }
     fun buttonIndiaClick()
     {
+        callLoadNewsAnalytics(getString(R.string.selectIndia))
         binding.textViewSelectedCountry.text=getString(R.string.selectIndia)
         mainViewModel.callWebService(getString(R.string.queryIndia),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
     }
+    fun callLoadNewsAnalytics(selectedButton:String)
+    {
+        //use firebase and fire analytics event
+        val params = Bundle()
+        params.putString("country", selectedButton)
+        analytics.logEvent("loadNews",params)
+    }
+
+    fun testCrash()
+    {
+        //used to test crash analytics implementation
+        throw RuntimeException("Test Crash") // Force a crash
+    }
+
+
 }

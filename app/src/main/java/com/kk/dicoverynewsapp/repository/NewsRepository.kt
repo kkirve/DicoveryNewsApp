@@ -27,7 +27,6 @@ class NewsRepository(private val userService: NewsService) //if need database ad
         if (result?.body() != null) {
             //return to view  model
             newsLiveData.postValue(result.body())
-
         }
 
     }

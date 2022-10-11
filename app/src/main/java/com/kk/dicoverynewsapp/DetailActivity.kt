@@ -4,17 +4,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.kk.dicoverynewsapp.databinding.ActivityDetailBinding
 import com.kk.dicoverynewsapp.databinding.ActivityMainBinding
 
 class DetailActivity: AppCompatActivity()  {
     private lateinit var binding: ActivityDetailBinding
     val TAG = "DetailedActivity"
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= DataBindingUtil.setContentView(this,R.layout.activity_detail)
-
+        analytics = Firebase.analytics
         setupArticleAndListener()
 
     }
@@ -35,6 +39,8 @@ class DetailActivity: AppCompatActivity()  {
         binding.tvNewsDesc.text=description
         binding.tvTime.text=publishedat
 
+        //load analytics
+        viewsDetailedNewsAnalytics(title,author)
 
         Glide.with(this).load(urltoimage).into(binding.ivNewsImage)
 
@@ -42,6 +48,16 @@ class DetailActivity: AppCompatActivity()  {
         {
             finish()
         }
+    }
+
+    fun viewsDetailedNewsAnalytics(newsTile:String,author :String)
+    {
+        //use firebase and fire analytics event
+        val params = Bundle()
+        params.putString("detailedNewsViewed", newsTile)
+        params.putString("newsAuthor", author)
+
+        analytics.logEvent("DetailNewsRead",params)
     }
 
 
