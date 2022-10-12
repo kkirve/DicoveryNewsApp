@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
+import com.kk.dicoverynewsapp.Utils.WebserviceUtil
 import com.kk.dicoverynewsapp.adapter.NewsRecyclerAdpater
 import com.kk.dicoverynewsapp.api.NewsService
 import com.kk.dicoverynewsapp.api.RetrofitHelper
@@ -88,13 +89,13 @@ class MainActivity : AppCompatActivity()  {
 
         callLoadNewsAnalytics(getString(R.string.selectUS))
         binding.textViewSelectedCountry.text=getString(R.string.selectUS)
-        mainViewModel.callWebService(getString(R.string.queryUS),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
+        callWebService(getString(R.string.queryUS),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
     }
     fun buttonIndiaClick()
     {
         callLoadNewsAnalytics(getString(R.string.selectIndia))
         binding.textViewSelectedCountry.text=getString(R.string.selectIndia)
-        mainViewModel.callWebService(getString(R.string.queryIndia),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
+        callWebService(getString(R.string.queryIndia),getString(R.string.queryFrom),getString(R.string.querySortBy),getString(R.string.queryAPIKey));
     }
     fun callLoadNewsAnalytics(selectedButton:String)
     {
@@ -109,6 +110,13 @@ class MainActivity : AppCompatActivity()  {
         //used to test crash analytics implementation
         throw RuntimeException("Test Crash") // Force a crash
     }
+    fun callWebService(queryString:String,queryFrom :String,querySortBy :String,queryAPIKey :String )
+    {
+        if(WebserviceUtil.isValidWebCall(queryString,queryFrom,querySortBy,queryAPIKey)) {
+            mainViewModel.callWebService(queryString, queryFrom, querySortBy, queryAPIKey);
+        }
+    }
+
 
 
 }
