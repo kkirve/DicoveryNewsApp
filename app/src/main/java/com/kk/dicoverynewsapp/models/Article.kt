@@ -1,11 +1,18 @@
 package com.kk.dicoverynewsapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName="news")
 data class Article(
-    val author: String,
+    @PrimaryKey(autoGenerate = true)
+    val id:Int,
+
+    val author: String?,
     val content: String,
     val description: String,
     val publishedAt: String,
-    val source: Source,
+  //  val source: Source,
     val title: String,
     val url: String,
     val urlToImage: String

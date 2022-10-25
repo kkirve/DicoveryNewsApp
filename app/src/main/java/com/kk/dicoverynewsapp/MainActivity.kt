@@ -1,6 +1,7 @@
 package com.kk.dicoverynewsapp
 
 import android.R.id
+import android.app.Application
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -38,8 +39,11 @@ class MainActivity : AppCompatActivity()  {
 
         //improvements :possible to define in application class
         //below object will access main view model
-        val newsService = RetrofitHelper.getInstance().create(NewsService::class.java)
-        val repository = NewsRepository(newsService)
+//        val newsService = RetrofitHelper.getInstance().create(NewsService::class.java)
+//        val repository = NewsRepository(newsService)
+
+        //use repository with application class
+        val repository=(application as ApplicationNews).repository
         val recyclerView = binding.listView
 
         //use param for calling viewmodel with factory to pass param

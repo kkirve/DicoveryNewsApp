@@ -3,11 +3,12 @@ package com.kk.dicoverynewsapp.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kk.dicoverynewsapp.api.NewsService
+import com.kk.dicoverynewsapp.db.NewsDatabase
 import com.kk.dicoverynewsapp.models.NewsList
 
 
 //Repository used in between View model and web api interface to manage data
-class NewsRepository(private val userService: NewsService) //if need database add one more param
+class NewsRepository(private val userService: NewsService,private val newsDatabase: NewsDatabase) //if need database add one more param
 {
 
     //News data for testing purpose
@@ -26,7 +27,9 @@ class NewsRepository(private val userService: NewsService) //if need database ad
         //null safety used
         if (result?.body() != null) {
             //return to view  model
+            newsDatabase.getNewsDao().addNews(result.body()!!.articles)
             newsLiveData.postValue(result.body())
+
         }
 
     }
